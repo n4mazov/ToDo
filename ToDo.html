@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <title>To-Do</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(73,73,186,0.8743872549019608) 51%, rgba(0,212,255,1) 100%);
+      display: flex;
+      justify-content: center;
+      padding: 80px;
+    }
+    #todo-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.232);
+    }
+    h2 {
+      text-align: center;
+      color: rgb(48, 48, 183);
+      font-family: "Kanit", sans-serif;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: "Kanit", sans-serif;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+      font-family: "Kanit", sans-serif;
+      transition: ease-out 2s;
+    }
+    li {
+      padding: 10px;
+      margin-top: 10px;
+      background: #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 5px;
+      font-family: "Kanit", sans-serif;
+      transition: ease-out 2s;
+    }
+    li.completed {
+      text-decoration: line-through;
+      color: gray;
+      transition: ease-out 2s;
+    }
+    button {
+      background: rgb(178, 122, 212);
+      color: white;
+      border: none;
+      padding: 5px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: rgb(132, 41, 193);
+    }
+  </style>
+</head>
+<body>
+  <div id="todo-container">
+    <h2>TO DO</h2>
+    <input type="text" id="taskInput" placeholder="Enter a task" />
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+
+    taskInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter" && taskInput.value.trim() !== "") {
+        addTask(taskInput.value.trim());
+        taskInput.value = "";
+      }
+    });
+
+    function addTask(taskText) {
+      const li = document.createElement("li");
+      li.textContent = taskText;
+
+      li.addEventListener("click", () => {
+        li.classList.toggle("completed");
+      });
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "X";
+      removeBtn.addEventListener("click", () => {
+        li.remove();
+      });
+
+      li.appendChild(removeBtn);
+      taskList.appendChild(li);
+    }
+  </script>
+</body>
+</html>
